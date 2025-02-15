@@ -1,46 +1,15 @@
 {
   "version": 2,
   "routes": [
-    // Redirect `/old-page` to `/new-page`
     {
       "src": "/old-page",
-      "dest": "/new-page",
-      "status": 308
-    },
-    // Catch-all route for undefined pages (404)
-    {
-      "src": "/(.*)",
-      "dest": "/404",
-      "status": 404
+      "dest": "/new-page"
     }
   ],
   "rewrites": [
-    // Rewrite `/api/v1/:path*` to an external API
     {
       "source": "/api/v1/:path*",
       "destination": "https://external-api.com/:path*"
     }
-  ],
-  "headers": [
-    // Add security headers
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "X-Content-Type-Options",
-          "value": "nosniff"
-        },
-        {
-          "key": "X-Frame-Options",
-          "value": "DENY"
-        },
-        {
-          "key": "Strict-Transport-Security",
-          "value": "max-age=63072000; includeSubDomains; preload"
-        }
-      ]
-    }
-  ],
-  "cleanUrls": true,
-  "trailingSlash": false
+  ]
 }
