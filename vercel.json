@@ -3,7 +3,13 @@
   "routes": [
     {
       "src": "/old-page",
-      "dest": "/new-page"
+      "dest": "/new-page",
+      "status": 308
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/404",
+      "status": 404
     }
   ],
   "rewrites": [
@@ -11,5 +17,22 @@
       "source": "/api/v1/:path*",
       "destination": "https://external-api.com/:path*"
     }
-  ]
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        }
+      ]
+    }
+  ],
+  "cleanUrls": true,
+  "trailingSlash": false
 }
